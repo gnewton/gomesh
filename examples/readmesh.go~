@@ -2,13 +2,9 @@
 package jianGoMeSHi
  
 import (
-//	"bufio"
-//	"os"
 	"fmt"
 	"runtime"
-//	"compress/gzip"
-//	"encoding/json"
-	//"bytes"
+	"github.com/gnewton/jianGoMeSHi"
 )
 
 
@@ -18,27 +14,27 @@ func main() {
 	runtime.GOMAXPROCS(numCpu)
 	
 	if true {
-		var nd *Node
+		var nd *jianGoMeSHi.Node
 		node := nd.Init()
 		fmt.Println(nd, node)
 	}
 
 	if false {
-		_, err := SupplementalMapFromFile("/home/newtong/2014/mesh/supp2014.xml.bz2")
+		_, err := jianGoMeSHi.SupplementalMapFromFile("/home/newtong/2014/mesh/supp2014.xml.bz2")
 		if err != nil{
 			fmt.Println("error: ", err)
 			return
 		}
 
 		/////////////
-		_, err = QualifierMapFromFile("/home/newtong/2014/mesh/qual2014.xml.bz2")
+		_, err = jianGoMeSHi.QualifierMapFromFile("/home/newtong/2014/mesh/qual2014.xml.bz2")
 		if err != nil{
 			fmt.Println("error: ", err)
 			return
 		}
 	}
 	
-	descMap, err := DescriptorMapFromFile("/home/newtong/2014/mesh/desc2014.xml.bz2")
+	descMap, err := jianGoMeSHi.DescriptorMapFromFile("/home/newtong/2014/mesh/desc2014.xml.bz2")
 	//descMap, err := DescriptorMapFromFile("/home/newtong/gocode/jiangomeshi/testData/desc2014_29records.xml.bz2")
 	if err != nil{
 		fmt.Println(err)
@@ -46,7 +42,7 @@ func main() {
 	}
 
 
-	SelfLinkDescriptor(descMap)
+	jianGoMeSHi.SelfLinkDescriptor(descMap)
 
 	
 	/*
