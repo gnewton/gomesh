@@ -46,7 +46,7 @@ func main() {
 	}
 
 
-	selfLinkDescriptor(descMap)
+	SelfLinkDescriptor(descMap)
 
 	
 	/*
