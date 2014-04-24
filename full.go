@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func selfLinkDescriptor(m map[string]*DescriptorRecord){
+func SelfLinkDescriptor(m map[string]*DescriptorRecord){
 	var nd *Node
 	root := nd.Init()
 
