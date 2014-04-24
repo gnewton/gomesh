@@ -7,7 +7,7 @@ import (
 
 func selfLinkDescriptor(m map[string]*DescriptorRecord){
 	var nd *Node
-	root := nd.init()
+	root := nd.Init()
 
 	for _, v := range m {
 		//linkSeeRelated(m, v)

@@ -32,7 +32,7 @@ func (node *Node) traverse(depth int){
 	}
 }
 
-func (node *Node) init()(*Node){
+func (node *Node) Init()(*Node){
 	if node == nil{
 		node = new(Node)
 		node.treeNumber = "unswet"
@@ -79,7 +79,7 @@ func addTreeNumber(root *Node, rec *DescriptorRecord, treeNumber string){
 		child, ok := node.children[part]
 		if !ok{
 			var nd *Node
-			child = nd.init()
+			child = nd.Init()
 			child.treeNumber = thisTree
 			child.nodeNumber = part
 			child.children["foo"] = nil

@@ -19,7 +19,7 @@ func main() {
 	
 	if true {
 		var nd *Node
-		node := nd.init()
+		node := nd.Init()
 		fmt.Println(nd, node)
 	}
 
