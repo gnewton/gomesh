@@ -9,9 +9,9 @@ import (
 type Node struct{
 	treeNumber string
 	nodeNumber string
-	children map[string]*Node
-	allDescriptors map[string]bool
-	descriptor *DescriptorRecord
+	children map[string]*Node `json:"-"`
+	allDescriptors map[string]bool `json:"-"`
+	descriptor *DescriptorRecord `json:"-"`
 }
 
 func (node *Node) traverse(depth int){
