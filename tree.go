@@ -53,7 +53,6 @@ func addDescriptor(root *Node, rec *DescriptorRecord){
 
 	if rec.TreeNumberList.TreeNumber != nil{
 		for _, treeNumber := range rec.TreeNumberList.TreeNumber {
-			fmt.Println(treeNumber)
 			addTreeNumber(root, rec, treeNumber)
 		}
 	}
@@ -85,7 +84,6 @@ func addTreeNumber(root *Node, rec *DescriptorRecord, treeNumber string){
 			child.children["foo"] = nil
 			node.children[child.nodeNumber] = child
 		}
-		//fmt.Printf("\t child %+v\n", child)
 		node = child
 	}
 	root.allDescriptors[treeNumber] = true

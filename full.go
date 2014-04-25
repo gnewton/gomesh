@@ -2,7 +2,7 @@
 package jianGoMeSHi
 
 import (
-	"fmt"
+
 )
 
 func SelfLinkDescriptor(m map[string]*DescriptorRecord){
@@ -18,6 +18,17 @@ func SelfLinkDescriptor(m map[string]*DescriptorRecord){
 	root.traverse(0)
 }
 
+func MakeTree(m map[string]*DescriptorRecord)(root *Node){
+	var nd *Node
+	root = nd.Init()
+	for _, v := range m {
+		//linkSeeRelated(m, v)
+		linkConceptRelations(m,v)
+		makeTree(root, v)
+	}
+	return root
+}
+
 func makeTree(root *Node, desc *DescriptorRecord){
 	addDescriptor(root, desc)
 }
@@ -25,7 +36,6 @@ func makeTree(root *Node, desc *DescriptorRecord){
 func linkSeeRelated(m map[string]*DescriptorRecord, desc *DescriptorRecord){
 	seeRelatedList := desc.SeeRelatedList
 	if &seeRelatedList != nil{
-		fmt.Println("")
 		seeRelatedDescriptors := seeRelatedList.SeeRelatedDescriptor
 		for _, srd := range seeRelatedDescriptors{
 			refDesc, ok := m[srd.DescriptorReferredTo.DescriptorUI]
@@ -40,7 +50,6 @@ func linkSeeRelated(m map[string]*DescriptorRecord, desc *DescriptorRecord){
 func linkConceptRelations(m map[string]*DescriptorRecord, desc *DescriptorRecord){
 	conceptList := desc.ConceptList
 	if &conceptList != nil{
-		fmt.Println("")
 		concepts := conceptList.Concept
 		for _, concept := range concepts{
 			conceptRelationList := concept.ConceptRelationList
