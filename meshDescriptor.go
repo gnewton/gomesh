@@ -31,6 +31,8 @@ type Concept struct{
 	ScopeNote string
 	SemanticTypeList SemanticTypeList 
 	TermList TermList
+	TranslatorsEnglishScopeNote string
+	TranslatorsScopeNote string
 }
 
 type ConceptList struct{
@@ -38,9 +40,9 @@ type ConceptList struct{
 }
 
 type ConceptRelation struct{
-	RelationName string `xml:",attr"`
 	Concept1UI string
 	Concept2UI string
+	RelationName string `xml:",attr"`
 }
 
 type ConceptRelationList struct{
@@ -66,17 +68,21 @@ type DescriptorRecord struct {
 	DateRevised Date
 	DescriptorName string `xml:"DescriptorName>String"`
 	DescriptorUI string
-	HistoryNote string
 	EntryCombinationList EntryCombinationList
+	HistoryNote string
+	OnlineNote string
 	PharmacologicalActionList PharmacologicalActionList
 	PreviousIndexingList PreviousIndexingList
+	PublicMeSHNote string
 	RecordOriginatorsList RecordOriginatorsList
+	RunningHead string
 	SeeRelatedList SeeRelatedList
 	TreeNumberList TreeNumberList
 }
 
 type DescriptorRecordSet struct{
 	DescriptorRecord []DescriptorRecord
+	LanguageCode string `xml:",attr"`
 }
 
 type DescriptorReferredTo struct{
@@ -158,6 +164,7 @@ type SemanticTypeList struct{
 }
 
 type Term struct{
+	Abbreviation string
 	ConceptPreferredTermYN string `xml:",attr"`
 	DateCreated Date
 	EntryVersion string
@@ -165,7 +172,9 @@ type Term struct{
 	LexicalTag string `xml:",attr"`
 	PrintFlagYN string `xml:",attr"`
 	RecordPreferredTermYN string `xml:",attr"`
+	SortVersion string
 	String string
+	TermNote string
 	TermUI string
 	ThesaurusIDlist ThesaurusIDlist
 }

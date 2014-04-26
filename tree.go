@@ -7,8 +7,9 @@ import (
 
 
 type Node struct{
-	treeNumber string
-	nodeNumber string
+	foo string `json:"foo"`
+	treeNumber string `json:"treeNumber`
+	nodeNumber string `json:`
 	children map[string]*Node `json:"-"`
 	allDescriptors map[string]bool `json:"-"`
 	descriptor *DescriptorRecord `json:"-"`
@@ -35,7 +36,6 @@ func (node *Node) traverse(depth int){
 func (node *Node) Init()(*Node){
 	if node == nil{
 		node = new(Node)
-		node.treeNumber = "unswet"
 		node.children = make(map[string]*Node)
 		node.allDescriptors = make(map[string]bool)
 	}

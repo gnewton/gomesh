@@ -10,13 +10,12 @@ import (
 )
 
 
-
 // Change these to match the MeSH files you download from http://www.nlm.nih.gov/mesh/filelist.html
 // The XML files are desc2014, supp2014, qual2014
 // You can compress these with either gz or bz2 & this app will transparently uncompress them. Or you can leave them as-is.
 //
-//const DESCRIPTOR_XML_FILE = "../testData/desc2014_29records.xml.bz2"
-const DESCRIPTOR_XML_FILE = "/home/newtong/2014/mesh/desc2014.xml.bz2"
+const DESCRIPTOR_XML_FILE = "../testData/desc2014_29records.xml.bz2"
+//const DESCRIPTOR_XML_FILE = "/home/newtong/2014/mesh/desc2014.xml.bz2"
 const QUALIFIER_XML_FILE = "../testData/qual2014_8records.xml.bz2"
 const SUPPLEMENTAL_XML_FILE = "../testData/supp2014_4records.xml"
 
@@ -78,7 +77,12 @@ func GetQualifier(w rest.ResponseWriter, req *rest.Request) {
 }
 
 func GetTree(w rest.ResponseWriter, req *rest.Request) {
-	w.WriteJson(root)
+	var nd *jianGoMeSHi.Node
+	child := nd.Init()
+	//w.WriteJson(root)
+	log.Println(child)
+	w.WriteJson(child)
+	//w.WriteJson("hello")
 }
 
 func main() {
@@ -148,7 +152,7 @@ func loadData()(error){
 	}
 
 	root = jianGoMeSHi.MakeTree(descMap)
-	log.Println(root)
+	//log.Println(root)
 
 	log.Println("Done Loading MeSH XML...")
 	return nil

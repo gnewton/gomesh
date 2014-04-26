@@ -36,7 +36,7 @@ func makeNextQualifier(qualChannel chan *QualifierRecord)(nextChannelItem){
 
 func TestReadOneDescription(t *testing.T){
 	descFileName := "./testData/desc2014_1record.xml"
-	descChannel, file, err := descriptorChannelFromFile(descFileName)
+	descChannel, file, err := DescriptorChannelFromFile(descFileName)
 	defer file.Close()
 
 	if err != nil {
@@ -51,7 +51,7 @@ func TestReadOneDescription(t *testing.T){
 
 func TestReadManyDescriptions(t *testing.T){
 	descFileName := "./testData/desc2014_29records.xml.bz2"
-	descChannel, file, err := descriptorChannelFromFile(descFileName)
+	descChannel, file, err := DescriptorChannelFromFile(descFileName)
 	defer file.Close()
 
 	if err != nil {
@@ -64,22 +64,22 @@ func TestReadManyDescriptions(t *testing.T){
 }
 
 func TestReadManyQualifiers(t *testing.T){
-	qualFileName := "./testData/qual2014.xml.bz2"
-	qualChannel, file, err := qualifierChannelFromFile(qualFileName)
+	qualFileName := "./testData/qual2014_8records.xml.bz2"
+	qualChannel, file, err := QualifierChannelFromFile(qualFileName)
 	defer file.Close()
 
 	if err != nil {
 		t.Fatal("Error occured", err)
 		return
 	}
-	if countChannel(makeNextQualifier(qualChannel)) != 83{
+	if countChannel(makeNextQualifier(qualChannel)) != 8{
 		t.Fail()
 	}
 }
 
 func TestReadOneQualifier(t *testing.T){
 	qualFileName := "./testData/qual2014_1record.xml.bz2"
-	qualChannel, file, err := qualifierChannelFromFile(qualFileName)
+	qualChannel, file, err := QualifierChannelFromFile(qualFileName)
 	defer file.Close()
 
 	if err != nil {
@@ -93,7 +93,7 @@ func TestReadOneQualifier(t *testing.T){
 
 func TestReadManySupplementalRecords(t *testing.T){
 	suppFileName := "./testData/supp2014_4records.xml"
-	suppChannel, file, err := supplementalChannelFromFile(suppFileName)
+	suppChannel, file, err := SupplementalChannelFromFile(suppFileName)
 	defer file.Close()
 
 	if err != nil {
@@ -107,7 +107,7 @@ func TestReadManySupplementalRecords(t *testing.T){
 
 func TestReadOneSupplementalRecord(t *testing.T){
 	suppFileName := "./testData/supp2014_1record.xml"
-	suppChannel, file, err := supplementalChannelFromFile(suppFileName)
+	suppChannel, file, err := SupplementalChannelFromFile(suppFileName)
 	defer file.Close()
 
 	if err != nil {
