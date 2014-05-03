@@ -11,6 +11,15 @@ import (
 )
 
 
+func MeshDescriptorNameMap(uiMap map[string]*DescriptorRecord)map[string]*DescriptorRecord{
+	descriptorNameMap := make(map[string]*DescriptorRecord)	
+
+	for _, desc := range uiMap {
+		descriptorNameMap[desc.DescriptorName] = desc
+	}
+	return descriptorNameMap
+}
+
 func DescriptorMapFromFile(filename string)(map[string]*DescriptorRecord, error){
 	reader, file, err := genericReader(filename)
 	defer file.Close()

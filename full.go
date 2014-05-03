@@ -14,9 +14,9 @@ func SelfLinkDescriptor(m map[string]*DescriptorRecord){
 		linkConceptRelations(m,v)
 		makeTree(root, v)
 	}
-
-	root.traverse(0)
+	root.Traverse(0, nil)
 }
+
 
 func MakeTree(m map[string]*DescriptorRecord)(root *Node){
 	var nd *Node
@@ -26,7 +26,7 @@ func MakeTree(m map[string]*DescriptorRecord)(root *Node){
 		linkConceptRelations(m,v)
 		makeTree(root, v)
 	}
-	return root
+	return addTopLevels(root)
 }
 
 func makeTree(root *Node, desc *DescriptorRecord){

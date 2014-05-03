@@ -30,11 +30,14 @@ func main() {
 			fmt.Println("error:", err)
 		}
 		os.Stdout.Write(b)
+		os.Stdout.Write([]byte("\n"))
 	}
 }
 
 func usage(){
-	
+	fmt.Println("Convert MeSH descriptor record XML to json")
+	fmt.Println("\nUsage: meshDescriptorXmlToJson.go <filename>")
+	fmt.Println("\t Try filename=../testData/desc2014_29records.xml.bz2")
 }
 
 	

@@ -3,12 +3,12 @@ package jianGoMeSHi
 const QUALIFIER_RECORD = "QualifierRecord"
 
 type QualifierRecordSet struct{
-	QualifierRecord []QualifierRecord
+	QualifierRecord []*QualifierRecord
 }
 
 type QualifierRecord struct{
 	QualifierUI string
-	QualifierName string `xml:">QualifierName>String"`
+	QualifierName string `xml:"QualifierName>String"`
 	DateCreated Date
 	DateRevised Date
 	DateEstablished Date
@@ -24,9 +24,10 @@ type QualifierRecord struct{
 }
 
 type TreeNodeAllowedList struct{
-	TreeNodeAllowed []TreeNodeAllowedList
-}
+	TreeNodeAllowed []TreeNodeAllowed `json:",omitempty"`
+	//TreeNodeAllowed []string `xml:">TreeNodeAllowed" json:",omitempty"`
+} 
 
 type TreeNodeAllowed struct{
-	TreeNodeAllowed string
+	TreeNodeAllowed string `xml:",chardata" json:",omitempty"`
 }

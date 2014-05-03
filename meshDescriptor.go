@@ -12,7 +12,7 @@ type Abbreviation  struct{
 //}
 
 type AllowableQualifier struct{
-	QualifierReferredTo QualifierReferredTo
+	QualifierReferredTo *QualifierReferredTo
 	Abbreviation Abbreviation
 }
 
@@ -21,22 +21,22 @@ type AllowableQualifiersList struct{
 }
 
 type Concept struct{
-	CASN1Name string
+	CASN1Name string `json:",omitempty"`
 	ConceptName string `xml:">String"`
-	ConceptRelationList ConceptRelationList
+	ConceptRelationList ConceptRelationList `json:",omitempty"`
 	ConceptUI string
 	PreferredConceptYN string `xml:",attr"`
-	RegistryNumber string
-	RelatedRegistryNumberList RelatedRegistryNumberList 
-	ScopeNote string
-	SemanticTypeList SemanticTypeList 
-	TermList TermList
-	TranslatorsEnglishScopeNote string
-	TranslatorsScopeNote string
+	RegistryNumber string `json:",omitempty"`
+	RelatedRegistryNumberList RelatedRegistryNumberList  `json:",omitempty"`
+	ScopeNote string `json:",omitempty"`
+	SemanticTypeList SemanticTypeList `json:",omitempty"`
+	TermList TermList `json:",omitempty"`
+	TranslatorsEnglishScopeNote string `json:",omitempty"`
+	TranslatorsScopeNote string `json:",omitempty"`
 }
 
 type ConceptList struct{
-	Concept []Concept
+	Concept []Concept `json:",omitempty"`
 }
 
 type ConceptRelation struct{
@@ -46,37 +46,36 @@ type ConceptRelation struct{
 }
 
 type ConceptRelationList struct{
-	ConceptRelation []ConceptRelation
-}
+	ConceptRelation []ConceptRelation `json:",omitempty"`}
 
 
 type Date struct{
-	Year string
-	Month string
-	Day string
+	Year string `json:",omitempty"`
+	Month string `json:",omitempty"`
+	Day string `json:",omitempty"`
 }
 
 
 type DescriptorRecord struct {
 	ActiveMeSHYearList []string `xml:">Year"`
 	AllowableQualifiersList AllowableQualifiersList
-	Annotation string
+	Annotation string `json:",omitempty"`
 	ConceptList ConceptList
-	ConsiderAlso string
-	DateCreated Date
-	DateEstablished Date
-	DateRevised Date
+	ConsiderAlso string `json:",omitempty"`
+	DateCreated Date `json:",omitempty"`
+	DateEstablished Date `json:",omitempty"`
+	DateRevised Date `json:",omitempty"`
 	DescriptorName string `xml:"DescriptorName>String"`
 	DescriptorUI string
 	EntryCombinationList EntryCombinationList
-	HistoryNote string
-	OnlineNote string
+	HistoryNote string `json:",omitempty"`
+	OnlineNote string `json:",omitempty"`
 	PharmacologicalActionList PharmacologicalActionList
 	PreviousIndexingList PreviousIndexingList
-	PublicMeSHNote string
+	PublicMeSHNote string `json:",omitempty"`
 	RecordOriginatorsList RecordOriginatorsList
-	RunningHead string
-	SeeRelatedList SeeRelatedList
+	RunningHead string `json:",omitempty"`
+	SeeRelatedList SeeRelatedList `json:",omitempty"`
 	TreeNumberList TreeNumberList
 }
 
@@ -88,54 +87,56 @@ type DescriptorRecordSet struct{
 type DescriptorReferredTo struct{
 	DescriptorUI string
 	DescriptorName string `xml:"DescriptorName>String"`
-	DescriptorRecord *DescriptorRecord  `xml:"-"`
+	DescriptorRecord *DescriptorRecord  `xml:"-" json:",omitempty"`
+	Url string `json:",omitempty"`
 }
 
 type ECIN struct{
-	DescriptorReferredTo DescriptorReferredTo
+	DescriptorReferredTo *DescriptorReferredTo `json:",omitempty"`
 }
 
 type ECOUT struct{
-	DescriptorReferredTo DescriptorReferredTo
+	DescriptorReferredTo *DescriptorReferredTo `json:",omitempty"`
 }
 
 type EntryCombination struct{
-	ECIN ECIN
-	ECOUT ECOUT
+	ECIN ECIN `json:",omitempty"`
+	ECOUT ECOUT `json:",omitempty"`
 }
 
 type EntryCombinationList struct{
-	EntryCombination []EntryCombination
+	EntryCombination []EntryCombination `json:",omitempty"`
 }
 
 type PharmacologicalAction struct{
-	DescriptorReferredTo DescriptorReferredTo
+	DescriptorReferredTo *DescriptorReferredTo `json:",omitempty"`
 }
 
 type PharmacologicalActionList struct{
-	PharmacologicalAction []PharmacologicalAction
+	PharmacologicalAction []PharmacologicalAction `json:",omitempty"`
 }
 
 type  PreviousIndexingList struct{
-	PreviousIndexing []string
+	PreviousIndexing []string `json:",omitempty"`
 }
 
 type QualifierReferredTo struct{
 	QualifierUI string
 	QualifierName string `xml:"QualifierName>String"`
-	QualifierRecord *QualifierRecord `xml:"-"`
+	QualifierRecord *QualifierRecord `xml:"-" json:",omitempty"`
+	Url string `json:",omitempty"`
 }
 
 
 
 type RecordOriginator struct{
-	RecordOriginator string
-	RecordMaintainer string
-	RecordAuthorizer string
+	RecordOriginator string `json:",omitempty"`
+	RecordMaintainer string `json:",omitempty"`
+	RecordAuthorizer string `json:",omitempty"`
 }
 
 type RecordOriginatorsList struct{
-	RecordOriginator []RecordOriginator
+	RecordOriginator []RecordOriginator `json:",omitempty"`
 }
 
 type RelatedRegistryNumber struct{
@@ -143,50 +144,55 @@ type RelatedRegistryNumber struct{
 }
 
 type RelatedRegistryNumberList struct{
-	RelatedRegistryNumber []RelatedRegistryNumber
+	RelatedRegistryNumber []RelatedRegistryNumber `json:",omitempty"`
 }
 
 type SeeRelatedDescriptor struct{
-	DescriptorReferredTo DescriptorReferredTo
+	DescriptorReferredTo *DescriptorReferredTo `json:",omitempty"`
 }
 
 type SeeRelatedList struct{
-	SeeRelatedDescriptor []SeeRelatedDescriptor
+	SeeRelatedDescriptor []SeeRelatedDescriptor  `json:",omitempty"`
 }
 
 type SemanticType struct{
-	SemanticTypeUI string
-	SemanticTypeName string
+	SemanticTypeUI string `json:",omitempty"`
+	SemanticTypeName string `json:",omitempty"`
 }
 
 type SemanticTypeList struct{
-	SemanticType []SemanticType
+	SemanticType []SemanticType `json:",omitempty"`
 }
 
 type Term struct{
-	Abbreviation string
+	Abbreviation string `json:",omitempty"`
 	ConceptPreferredTermYN string `xml:",attr"`
-	DateCreated Date
-	EntryVersion string
-	IsPermutedTermYN string `xml:",attr"`
-	LexicalTag string `xml:",attr"`
-	PrintFlagYN string `xml:",attr"`
-	RecordPreferredTermYN string `xml:",attr"`
-	SortVersion string
-	String string
-	TermNote string
-	TermUI string
-	ThesaurusIDlist ThesaurusIDlist
+	DateCreated Date `json:",omitempty"`
+	EntryVersion string `json:",omitempty"`
+	IsPermutedTermYN string `xml:",attr" json:",omitempty"`
+	LexicalTag string `xml:",attr" json:",omitempty"`
+	PrintFlagYN string `xml:",attr" json:",omitempty"`
+	RecordPreferredTermYN string `xml:",attr" json:",omitempty"`
+	SortVersion string `json:",omitempty"`
+	String string `json:",omitempty"`
+	TermNote string `json:",omitempty"`
+	TermUI string `json:",omitempty"`
+	ThesaurusIDlist ThesaurusIDlist `json:",omitempty"`
 }
 
 type TermList struct{
-	Term []Term
+	Term []Term `json:",omitempty"`
 }
 
 type ThesaurusIDlist struct{
-	ThesaurusID []string
+	ThesaurusID []string `json:",omitempty"`
+}
+
+type TreeNumber struct{
+	TreeNumber string `xml:",chardata"`
+	Url string `json:",omitempty"`
 }
 
 type TreeNumberList struct{
-	TreeNumber []string
+	TreeNumber []TreeNumber
 }

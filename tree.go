@@ -1,43 +1,72 @@
 package jianGoMeSHi
 
 import (
-	"fmt"
+//	"fmt"
 	"strings"
+//	"log"
 )
 
 
 type Node struct{
-	foo string `json:"foo"`
-	treeNumber string `json:"treeNumber`
-	nodeNumber string `json:`
-	children map[string]*Node `json:"-"`
-	allDescriptors map[string]bool `json:"-"`
-	descriptor *DescriptorRecord `json:"-"`
+	TreeNumber string `json:"treeNumber`
+	NodeNumber string  `json:"-"`
+	Name string `json:",omitempty"`
+	Children []IdEntry `json:",omitempty"`
+	ChildrenMap map[string]*Node `json:"-"`
+	AllDescriptors map[string]bool `json:"-"`
+	DescriptorUrl string `json:",omitempty"`
+	Descriptor *DescriptorRecord `json:"-"`
 }
 
-func (node *Node) traverse(depth int){
+var TOP_LEVEL = map[string]string{
+	"A": "Anatomy", 
+	"B": "Organisms", 
+	"C": "Diseases", 
+	"D": "Chemicals and Drugs", 
+	"E": "Analytical, Diagnostic and Therapeutic Techniques and Equipment", 
+	"F": "Psychiatry and Psychology", 
+	"G": "Phenomena and Processes", 
+	"H": "Disciplines and Occupations", 
+	"I": "Anthropology, Education, Sociology and Social Phenomena", 
+	"J": "Technology, Industry, Agriculture", 
+	"K": "Humanities", 
+	"L": "Information Science", 
+	"M": "Named Groups", 
+	"N": "Health Care", 
+	"V": "Publication Characteristics", 
+	"Z": "Geographicals",  
+}
+
+type IdEntry struct{
+	Id string
+	Url string
+	Label string `json:",omitempty"`
+}
+
+
+type useNode func(*Node)
+
+func (node *Node) Traverse(depth int, nodeUser useNode){
 	if node == nil{
 		return
 	}
-	if depth == 1{
-		fmt.Println("---------------------------------------------------------------------")
+	if node.Descriptor != nil{
+		//str = node.Descriptor.DescriptorUI + " " + node.Descriptor.DescriptorName
+		node.Name = node.Descriptor.DescriptorName
 	}
-	spc := strings.Repeat(" ", depth)
-	var str string
-	if node.descriptor != nil{
-		str = node.descriptor.DescriptorUI + " " + node.descriptor.DescriptorName
+	for _, childNode := range node.ChildrenMap{
+		childNode.Traverse(depth +1, nodeUser)
 	}
-	fmt.Println(spc, node.nodeNumber, str)
-	for _, child := range node.children{
-		child.traverse(depth +1)
+	if nodeUser != nil{
+		nodeUser(node)
 	}
 }
 
 func (node *Node) Init()(*Node){
 	if node == nil{
 		node = new(Node)
-		node.children = make(map[string]*Node)
-		node.allDescriptors = make(map[string]bool)
+		node.ChildrenMap = make(map[string]*Node)
+		node.AllDescriptors = make(map[string]bool)
 	}
 	return node
 }
@@ -53,7 +82,7 @@ func addDescriptor(root *Node, rec *DescriptorRecord){
 
 	if rec.TreeNumberList.TreeNumber != nil{
 		for _, treeNumber := range rec.TreeNumberList.TreeNumber {
-			addTreeNumber(root, rec, treeNumber)
+			addTreeNumber(root, rec, treeNumber.TreeNumber)
 		}
 	}
 	
@@ -61,7 +90,7 @@ func addDescriptor(root *Node, rec *DescriptorRecord){
 
 const TREE_SEPARATOR = "."
 func addTreeNumber(root *Node, rec *DescriptorRecord, treeNumber string){
-	_, ok := root.allDescriptors[treeNumber]
+	_, ok := root.AllDescriptors[treeNumber]
 	if ok{
 		return
 	}
@@ -75,17 +104,53 @@ func addTreeNumber(root *Node, rec *DescriptorRecord, treeNumber string){
 		}
 		thisTree += part
 
-		child, ok := node.children[part]
+		child, ok := node.ChildrenMap[part]
 		if !ok{
 			var nd *Node
 			child = nd.Init()
-			child.treeNumber = thisTree
-			child.nodeNumber = part
-			child.children["foo"] = nil
-			node.children[child.nodeNumber] = child
+			child.TreeNumber = thisTree
+			//fmt.Println("---- " + thisTree)
+			child.NodeNumber = part
+			node.ChildrenMap[child.NodeNumber] = child
 		}
 		node = child
 	}
-	root.allDescriptors[treeNumber] = true
-	node.descriptor = rec
+	root.AllDescriptors[treeNumber] = true
+	node.Descriptor = rec
+}
+
+func addTopLevels(root *Node) *Node{
+	var nd *Node
+	top := nd.Init()
+	top.Children = make([]IdEntry, len(TOP_LEVEL))
+	i := 0
+	for key, label := range TOP_LEVEL {
+		entry := new(IdEntry)
+		entry.Label = label
+		entry.Id = key
+		top.Children[i] = *entry
+		//log.Println(key, label)
+		//log.Printf("%+v\n", top)
+
+		childNode := nd.Init()
+		childNode.TreeNumber = key
+		childNode.Name = label
+		top.ChildrenMap[key] = childNode
+		///log.Println(root.ChildrenMap)
+		findTopChildren(childNode, root.ChildrenMap)
+
+		i += 1
+	}
+	//log.Printf("*** %+v\n", top)
+	return top
+}
+
+func findTopChildren(node *Node, rootChildren map[string]*Node){
+	for key,child := range rootChildren {
+		//fmt.Println("~~ ", string(key[0]), node.TreeNumber)
+		if string(key[0]) == node.TreeNumber{
+			//fmt.Println("+++++++++++++++++++++ ", child.TreeNumber, node.Name)
+			node.ChildrenMap[child.TreeNumber] = child
+		}
+	}
 }
