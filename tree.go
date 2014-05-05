@@ -100,7 +100,7 @@ func addTreeNumber(root *Node, rec *DescriptorRecord, treeNumber string){
 	node := root
 	for index,part := range parts{
 		if index > 0{
-			thisTree += TREE_SEPARATOR
+			thisTree += "."
 		}
 		thisTree += part
 
