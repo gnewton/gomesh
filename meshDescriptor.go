@@ -110,6 +110,11 @@ type EntryCombinationList struct{
 
 type PharmacologicalAction struct{
 	DescriptorReferredTo *DescriptorReferredTo `json:",omitempty"`
+	PharmacologicalActionSubstanceList PharmacologicalActionSubstanceList `json:",omitempty"`
+}
+
+type PharmacologicalActionSubstanceList struct{
+	Substance []Substance `json:",omitempty"`
 }
 
 type PharmacologicalActionList struct{

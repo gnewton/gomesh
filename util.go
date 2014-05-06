@@ -56,11 +56,33 @@ func DescriptorChannelFromFile(filename string)(desChan chan *DescriptorRecord, 
 }
 
 func DescriptorChannelFromReader(reader  io.Reader)(chan *DescriptorRecord, error){
-	desriptorChannel := make(chan *DescriptorRecord, 500)
-	go decodeDescriptor(desriptorChannel, reader)
+	descriptorChannel := make(chan *DescriptorRecord, 500)
+	go decodeDescriptor(descriptorChannel, reader)
 	
-	return desriptorChannel, nil
+	return descriptorChannel, nil
 }
+
+func decodeDescriptor(recordChannel chan *DescriptorRecord, reader io.Reader){
+//func decodeDescriptor(recordChannel chan interface{}, reader io.Reader){
+	decoder := xml.NewDecoder(reader) 
+
+	for { 
+		t, _ := decoder.Token() 
+		if t == nil { 
+			break 
+		} 
+		switch se := t.(type) { 
+		case xml.StartElement: 
+			if se.Name.Local == DESCRIPTOR_RECORD { 
+				var record DescriptorRecord
+				decoder.DecodeElement(&record, &se) 
+				recordChannel <- &record
+			}
+		}
+	}
+	close(recordChannel)
+}
+
 
 func SupplementalMapFromFile(filename string)(map[string]*SupplementalRecord, error){
 	reader, file, err := genericReader(filename)
@@ -171,6 +193,72 @@ func QualifierChannelFromReader(reader  io.Reader)(chan *QualifierRecord, error)
 	return qualChannel, nil
 }
 
+
+func PharmacologicalMapFromFile(filename string)(map[string]*PharmacologicalAction, error){
+	reader, file, err := genericReader(filename)
+	defer file.Close()
+	if err != nil {
+		return nil, err
+	}
+	return PharmacologicalMapFromReader(reader)
+}
+
+func PharmacologicalMapFromReader(reader  io.Reader)(map[string]*PharmacologicalAction, error){
+	pharmChan, err := PharmacologicalChannelFromReader(reader)
+	if err != nil{
+		return nil, err
+	}
+
+	pharmMap := make(map[string]*PharmacologicalAction)	
+	for sRecord := range pharmChan {
+		pharmMap[sRecord.DescriptorReferredTo.DescriptorUI] = sRecord
+	}
+	return pharmMap, nil
+}
+
+func PharmacologicalChannelFromFile(filename string)(pharmChan chan *PharmacologicalAction, file *os.File, err error){
+	reader, file, err := genericReader(filename)
+	//if fl, ok := reader.(*gzip.Reader); ok {
+	//defer fl.Close()
+	//} 
+	if err != nil {
+		return nil, nil, err
+	}
+	
+	pharmChan, err = PharmacologicalChannelFromReader(reader)
+	return pharmChan, file, err
+}
+
+
+
+func PharmacologicalChannelFromReader(reader  io.Reader)(chan *PharmacologicalAction, error){
+	pharmChannel := make(chan *PharmacologicalAction, 500)
+
+	go decodePharmacological(pharmChannel, reader)
+	
+	return pharmChannel, nil
+}
+
+func decodePharmacological(pharmChannel chan *PharmacologicalAction, reader io.Reader){
+	decoder := xml.NewDecoder(reader) 
+	for { 
+		t, _ := decoder.Token() 
+		if t == nil { 
+			break 
+		} 
+		switch se := t.(type) { 
+		case xml.StartElement: 
+			if se.Name.Local == PHARMACOLOGICAL_RECORD { 
+				var record PharmacologicalAction
+				decoder.DecodeElement(&record, &se) 
+				pharmChannel <- &record
+			}
+		}
+	}
+	close(pharmChannel)
+}
+
+
 func decodeQualifier(qualChannel chan *QualifierRecord, reader io.Reader){
 	decoder := xml.NewDecoder(reader) 
 	for { 
@@ -190,26 +278,6 @@ func decodeQualifier(qualChannel chan *QualifierRecord, reader io.Reader){
 	close(qualChannel)
 }
 
-func decodeDescriptor(recordChannel chan *DescriptorRecord, reader io.Reader){
-//func decodeDescriptor(recordChannel chan interface{}, reader io.Reader){
-	decoder := xml.NewDecoder(reader) 
-
-	for { 
-		t, _ := decoder.Token() 
-		if t == nil { 
-			break 
-		} 
-		switch se := t.(type) { 
-		case xml.StartElement: 
-			if se.Name.Local == DESCRIPTOR_RECORD { 
-				var record DescriptorRecord
-				decoder.DecodeElement(&record, &se) 
-				recordChannel <- &record
-			}
-		}
-	}
-	close(recordChannel)
-}
 
 func genericReader(filename string) (io.Reader, *os.File, error){
 	file, err := os.Open(filename)
