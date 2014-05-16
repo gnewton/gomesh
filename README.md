@@ -24,6 +24,11 @@ Naming
 =============
 As many Golang project are names Go_Foo_ I started with _GoMesh_ but then saw a similarity with _Ghomeshi_ and decided to name the project (partially) after (Jian Ghomeshi)[https://en.wikipedia.org/wiki/Jian_Ghomeshi] and settled on jianGoMeSHi (apologies Jian, as this mis-spells your last name, but matches the MeSH basis of this !). Yes, the connection with Jian is only (partially) phonetic. 
 
+TODO
+=============
+- Document core methods in README.md
+- Allow for loading then writing to SQLite then using SQLite so full data is not in memory (once done allow using SQLite as data source)
+
 
 Acknowledgement
 =============
