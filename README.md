@@ -20,6 +20,11 @@ Example
 Example usage: see [jsonGoMeSHi](https://github.com/gnewton/jsonGoMeSHi) or a running [example](http://s2.semanticscience.org:8080/mesh) of jsonGoMeSHi running at [Dumontier Lab](http://dumontierlab.com/)
 
 
+Naming
+=============
+As many Golang project are names Go_Foo_ I started with _GoMesh_ but then saw a similarity with _Ghomeshi_ and decided to name the project (partially) after (Jian Ghomeshi)[https://en.wikipedia.org/wiki/Jian_Ghomeshi] and settled on jianGoMeSHi (apologies Jian, as this mis-spells your last name, but matches the MeSH basis of this !). Yes, the connection with Jian is only (partially) phonetic. 
+
+
 Acknowledgement
 =============
 This work is a by-product of my graduate work at Carleton Univerity at [Dumontier Lab](http://dumontierlab.com/)
