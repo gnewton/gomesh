@@ -12,7 +12,7 @@ MeSH Record Types
 Data
 ====
 MeSH XML download is [here](http://www.nlm.nih.gov/mesh/filelist.html). 
-"Download of any of the full data files requires the completion of an online [Memorandum of Understanding](http://www.nlm.nih.gov/mesh/2014/download/termscon.html)."
+"_Download of any of the full data files requires the completion of an online [Memorandum of Understanding](http://www.nlm.nih.gov/mesh/2014/download/termscon.html)._"
 A tiny sample of this data is available in https://github.com/gnewton/jianGoMeSHi/tree/master/testData
 
 Example
