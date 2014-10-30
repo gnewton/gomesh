@@ -1,4 +1,4 @@
-jianGoMeSHi
+gomesh
 ===========
 
 Go library to read [MEDLINE/PubMed Medical Subject Headings (MeSH)](http://www.nlm.nih.gov/mesh/) XML
@@ -13,11 +13,11 @@ Data
 ====
 MeSH XML download is [here](http://www.nlm.nih.gov/mesh/filelist.html). 
 "_Download of any of the full data files requires the completion of an online [Memorandum of Understanding](http://www.nlm.nih.gov/mesh/2014/download/termscon.html)._"
-A tiny sample of this data is available in https://github.com/gnewton/jianGoMeSHi/tree/master/testData
+A tiny sample of this data is available in https://github.com/gnewton/gomesh/tree/master/testData
 
 Example
 ===
-Example usage: see [jsonGoMeSHi](https://github.com/gnewton/jsonGoMeSHi) or a running [example](http://s2.semanticscience.org:8080/mesh) of jsonGoMeSHi running at [Dumontier Lab](http://dumontierlab.com/)
+Example usage: see [gomesh](https://github.com/gnewton/gomesh) or a running [example](http://s2.semanticscience.org:8080/mesh) of gomesh running at [Dumontier Lab](http://dumontierlab.com/)
 
 
 TODO
