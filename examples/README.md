@@ -1,4 +1,4 @@
-jianGoMeSHi Examples
+gomesh Examples
 ===========
 
 TODO
