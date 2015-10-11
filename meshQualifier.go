@@ -1,33 +1,32 @@
-package jianGoMeSHi
+package gomesh
 
 const QUALIFIER_RECORD = "QualifierRecord"
 
-type QualifierRecordSet struct{
+type QualifierRecordSet struct {
 	QualifierRecord []*QualifierRecord
 }
 
-type QualifierRecord struct{
-	QualifierUI string
-	QualifierName string `xml:"QualifierName>String"`
-	DateCreated Date
-	DateRevised Date
-	DateEstablished Date
-	ActiveMeSHYearList []string `xml:">Year"`
-	Annotation string
-	HistoryNote string
-	OnlineNote string
-	TreeNumberList TreeNumberList
-	TreeNodeAllowedList TreeNodeAllowedList
+type QualifierRecord struct {
+	QualifierUI           string
+	QualifierName         string `xml:"QualifierName>String"`
+	DateCreated           Date
+	DateRevised           Date
+	DateEstablished       Date
+	ActiveMeSHYearList    []string `xml:">Year"`
+	Annotation            string
+	HistoryNote           string
+	OnlineNote            string
+	TreeNumberList        TreeNumberList
+	TreeNodeAllowedList   TreeNodeAllowedList
 	RecordOriginatorsList RecordOriginatorsList
-	ConceptList ConceptList
-
+	ConceptList           ConceptList
 }
 
-type TreeNodeAllowedList struct{
+type TreeNodeAllowedList struct {
 	TreeNodeAllowed []TreeNodeAllowed `json:",omitempty"`
 	//TreeNodeAllowed []string `xml:">TreeNodeAllowed" json:",omitempty"`
-} 
+}
 
-type TreeNodeAllowed struct{
+type TreeNodeAllowed struct {
 	TreeNodeAllowed string `xml:",chardata" json:",omitempty"`
 }

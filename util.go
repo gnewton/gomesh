@@ -1,4 +1,4 @@
-package jianGoMeSHi
+package gomesh
 
 import (
 	"bufio"

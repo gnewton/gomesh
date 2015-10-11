@@ -1,16 +1,14 @@
-package jianGoMeSHi
+package gomesh
 
 const PHARMACOLOGICAL_RECORD = "PharmacologicalAction"
 
-type PharmacologicalActionSet struct{
+type PharmacologicalActionSet struct {
 	PharmacologicalAction []PharmacologicalAction
 }
 
-
-type Substance struct{
-	RecordUI string
-	DescriptorUrl string `json:",omitempty"`
+type Substance struct {
+	RecordUI        string
+	DescriptorUrl   string `json:",omitempty"`
 	SupplementalUrl string `json:",omitempty"`
-	RecordName string `xml:"RecordName>String"`
+	RecordName      string `xml:"RecordName>String"`
 }
-

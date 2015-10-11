@@ -1,9 +1,9 @@
 package main
- 
+
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gnewton/jianGoMeSHi"
+	"github.com/gnewton/gomesh"
 	"os"
 	"runtime"
 )
@@ -17,14 +17,14 @@ func main() {
 	}
 	descFilename := os.Args[1]
 
-	descChan, file, err := jianGoMeSHi.DescriptorChannelFromFile(descFilename)
+	descChan, file, err := gomesh.DescriptorChannelFromFile(descFilename)
 	defer file.Close()
 	if err != nil {
 		fmt.Println("error:", err)
 		return
 	}
 
-	for value := range descChan{
+	for value := range descChan {
 		b, err := json.Marshal(value)
 		if err != nil {
 			fmt.Println("error:", err)
@@ -34,10 +34,8 @@ func main() {
 	}
 }
 
-func usage(){
+func usage() {
 	fmt.Println("Convert MeSH descriptor record XML to json")
 	fmt.Println("\nUsage: meshDescriptorXmlToJson.go <filename>")
 	fmt.Println("\t Try filename=../testData/desc2014_29records.xml.bz2")
 }
-
-	
