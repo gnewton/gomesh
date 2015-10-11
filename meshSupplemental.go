@@ -7,12 +7,12 @@ type SupplementalRecordSet struct {
 }
 
 type SupplementalRecord struct {
-	SupplementalRecordUI    string
-	SupplementalRecordName  string                  `xml:"SupplementalRecordName>String"`
+	SupplementalRecordUI    string                  `json:",omitempty"`
+	SupplementalRecordName  string                  `xml:"SupplementalRecordName>String" json:",omitempty"`
 	DateCreated             Date                    `json:",omitempty"`
 	DateEstablished         Date                    `json:",omitempty"`
 	DateRevised             Date                    `json:",omitempty"`
-	ActiveMeSHYearList      []string                `xml:">Year"`
+	ActiveMeSHYearList      []string                `xml:">Year" json:",omitempty"`
 	Note                    string                  `json:",omitempty"`
 	Frequency               string                  `json:",omitempty"`
 	HeadingMappedToList     HeadingMappedToList     `json:",omitempty"`

@@ -20,11 +20,11 @@ type AllowableQualifiersList struct {
 }
 
 type Concept struct {
-	CASN1Name                   string              `json:",omitempty"`
-	ConceptName                 string              `xml:">String"`
-	ConceptRelationList         ConceptRelationList `json:",omitempty"`
-	ConceptUI                   string
-	PreferredConceptYN          string                    `xml:",attr"`
+	CASN1Name                   string                    `json:",omitempty"`
+	ConceptName                 string                    `xml:">String"`
+	ConceptRelationList         ConceptRelationList       `json:",omitempty"`
+	ConceptUI                   string                    `json:",omitempty"`
+	PreferredConceptYN          string                    `xml:",attr" json:",omitempty"`
 	RegistryNumber              string                    `json:",omitempty"`
 	RelatedRegistryNumberList   RelatedRegistryNumberList `json:",omitempty"`
 	ScopeNote                   string                    `json:",omitempty"`
@@ -41,7 +41,7 @@ type ConceptList struct {
 type ConceptRelation struct {
 	Concept1UI   string
 	Concept2UI   string
-	RelationName string `xml:",attr"`
+	RelationName string `xml:",attr" json:",omitempty"`
 }
 
 type ConceptRelationList struct {
@@ -57,24 +57,24 @@ type Date struct {
 type DescriptorRecord struct {
 	ActiveMeSHYearList        []string `xml:">Year"`
 	AllowableQualifiersList   AllowableQualifiersList
-	Annotation                string `json:",omitempty"`
-	ConceptList               ConceptList
-	ConsiderAlso              string `json:",omitempty"`
-	DateCreated               Date   `json:",omitempty"`
-	DateEstablished           Date   `json:",omitempty"`
-	DateRevised               Date   `json:",omitempty"`
-	DescriptorName            string `xml:"DescriptorName>String"`
-	DescriptorUI              string
-	EntryCombinationList      EntryCombinationList
-	HistoryNote               string `json:",omitempty"`
-	OnlineNote                string `json:",omitempty"`
-	PharmacologicalActionList PharmacologicalActionList
-	PreviousIndexingList      PreviousIndexingList
-	PublicMeSHNote            string `json:",omitempty"`
-	RecordOriginatorsList     RecordOriginatorsList
-	RunningHead               string         `json:",omitempty"`
-	SeeRelatedList            SeeRelatedList `json:",omitempty"`
-	TreeNumberList            TreeNumberList
+	Annotation                string                    `json:",omitempty"`
+	ConceptList               ConceptList               `json:",omitempty"`
+	ConsiderAlso              string                    `json:",omitempty"`
+	DateCreated               Date                      `json:",omitempty"`
+	DateEstablished           Date                      `json:",omitempty"`
+	DateRevised               Date                      `json:",omitempty"`
+	DescriptorName            string                    `xml:"DescriptorName>String"`
+	DescriptorUI              string                    `json:",omitempty"`
+	EntryCombinationList      EntryCombinationList      `json:",omitempty"`
+	HistoryNote               string                    `json:",omitempty"`
+	OnlineNote                string                    `json:",omitempty"`
+	PharmacologicalActionList PharmacologicalActionList `json:",omitempty"`
+	PreviousIndexingList      PreviousIndexingList      `json:",omitempty"`
+	PublicMeSHNote            string                    `json:",omitempty"`
+	RecordOriginatorsList     RecordOriginatorsList     `json:",omitempty"`
+	RunningHead               string                    `json:",omitempty"`
+	SeeRelatedList            SeeRelatedList            `json:",omitempty"`
+	TreeNumberList            TreeNumberList            `json:",omitempty"`
 }
 
 type DescriptorRecordSet struct {
@@ -83,7 +83,7 @@ type DescriptorRecordSet struct {
 }
 
 type DescriptorReferredTo struct {
-	DescriptorUI     string
+	DescriptorUI     string            `json:",omitempty"`
 	DescriptorName   string            `xml:"DescriptorName>String"`
 	DescriptorRecord *DescriptorRecord `xml:"-" json:",omitempty"`
 	Url              string            `json:",omitempty"`
@@ -195,5 +195,5 @@ type TreeNumber struct {
 }
 
 type TreeNumberList struct {
-	TreeNumber []TreeNumber
+	TreeNumber []TreeNumber `json:",omitempty"`
 }

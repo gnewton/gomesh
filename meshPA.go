@@ -10,5 +10,5 @@ type Substance struct {
 	RecordUI        string
 	DescriptorUrl   string `json:",omitempty"`
 	SupplementalUrl string `json:",omitempty"`
-	RecordName      string `xml:"RecordName>String"`
+	RecordName      string `xml:"RecordName>String" json:",omitempty"`
 }
