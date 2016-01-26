@@ -63,9 +63,6 @@ func DescriptorMapFromReader(reader io.Reader) (map[string]*DescriptorRecord, er
 
 func DescriptorChannelFromFile(filename string) (desChan chan *DescriptorRecord, file *os.File, err error) {
 	reader, file, err := genericReader(filename)
-	//if fl, ok := reader.(*gzip.Reader); ok {
-	//defer fl.Close()
-	//}
 	if err != nil {
 		return nil, nil, err
 	}
@@ -125,9 +122,6 @@ func SupplementalMapFromReader(reader io.Reader) (map[string]*SupplementalRecord
 
 func SupplementalChannelFromFile(filename string) (suppChan chan *SupplementalRecord, file *os.File, err error) {
 	reader, file, err := genericReader(filename)
-	//if fl, ok := reader.(*gzip.Reader); ok {
-	//defer fl.Close()
-	//}
 	if err != nil {
 		return nil, nil, err
 	}
@@ -187,9 +181,6 @@ func QualifierMapFromReader(reader io.Reader) (map[string]*QualifierRecord, erro
 
 func QualifierChannelFromFile(filename string) (qualChan chan *QualifierRecord, file *os.File, err error) {
 	reader, file, err := genericReader(filename)
-	//if fl, ok := reader.(*gzip.Reader); ok {
-	//defer fl.Close()
-	//}
 	if err != nil {
 		return nil, nil, err
 	}
@@ -230,9 +221,6 @@ func PharmacologicalMapFromReader(reader io.Reader) (map[string]*Pharmacological
 
 func PharmacologicalChannelFromFile(filename string) (pharmChan chan *PharmacologicalAction, file *os.File, err error) {
 	reader, file, err := genericReader(filename)
-	//if fl, ok := reader.(*gzip.Reader); ok {
-	//defer fl.Close()
-	//}
 	if err != nil {
 		return nil, nil, err
 	}
