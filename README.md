@@ -1,7 +1,7 @@
 gomesh
 ===========
 
-Go library to read [MEDLINE/PubMed Medical Subject Headings (MeSH)](http://www.nlm.nih.gov/mesh/) XML
+Go library to read [MEDLINE/PubMed Medical Subject Headings (MeSH)](http://www.nlm.nih.gov/mesh/) XML (2014)
 
 MeSH Record Types
 ===
