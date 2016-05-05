@@ -1,4 +1,4 @@
-package gomesh
+package gomesh2014
 
 import (
 	"testing"
